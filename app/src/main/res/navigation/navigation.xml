@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/redBookFragment">
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.greencodemoscow.redbook.favorites.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.greencodemoscow.redbook.map.presentation.screen.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/redBookFragment"
+        android:name="com.greencodemoscow.redbook.redBook.presentation.screen.RedBookFragment"
+        android:label="fragment_red_book"
+        tools:layout="@layout/fragment_red_book">
+        <action
+            android:id="@+id/action_redBookFragment_to_redBookItemFragment"
+            app:destination="@id/redBookItemFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/redBookItemFragment"
+        android:name="com.greencodemoscow.redbook.redBook.presentation.screen.RedBookItemFragment"
+        android:label="fragment_red_book_item"
+        tools:layout="@layout/fragment_red_book_item">
+        <argument
+            android:name="redBookItem"
+            app:argType="com.greencodemoscow.redbook.redBook.data.model.RedBookItem" />
+    </fragment>
+</navigation>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Состояние кнопки при нажатии -->
+    <item android:state_checked="true" android:color="@color/primaryDarkColor" />
+    <!-- Состояние кнопки в обычном состоянии -->
+    <item android:color="@color/lightGreen" />
+</selector>
