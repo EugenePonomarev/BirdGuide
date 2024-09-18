@@ -95,4 +95,7 @@ dependencies {
 
     // Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
+
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 }

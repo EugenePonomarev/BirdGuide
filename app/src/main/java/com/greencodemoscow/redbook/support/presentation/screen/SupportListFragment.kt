@@ -1,4 +1,4 @@
-package com.greencodemoscow.redbook.support.presentation
+package com.greencodemoscow.redbook.support.presentation.screen
 
 import android.os.Bundle
 import android.view.View

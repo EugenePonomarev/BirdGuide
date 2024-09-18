@@ -16,5 +16,39 @@
     <string name="details">Детали</string>
     <string name="to_list">К списку</string>
     <string name="do_not_inquiries">Обращений Нет</string>
-    <string name="add_item">Добавить элемент\n</string>
+    <string name="add_item">Добавить элемент</string>
+    <string name="report_title">Обращение</string>
+    <string name="category">Категория\n</string>
+    <string name="add_category">Дополнительная категория\n</string>
+    <string name="object_name">Название объекта</string>
+    <string name="event_description">Описание</string>
+    <string name="location">Локация</string>
+    <string name="auto_detect">Автоматическое определение</string>
+    <string name="manual_input">Ручной ввод</string>
+    <string name="no_location_selected">Выбранная локация\n</string>
+    <string name="date_time">Время/Дата</string>
+    <string name="select_date">Выбрать Дату</string>
+    <string name="select_time">Выбрать время</string>
+    <string name="no_date_selected">Выбранная дата</string>
+    <string name="no_time_selected">Выбранное время</string>
+    <string name="photos">Фото</string>
+    <string name="add_files">Добавь файл</string>
+    <string name="contact_info_optional">Контактная информация (необязательно)</string>
+    <string name="name">Имя</string>
+    <string name="email">E-mail\n</string>
+    <string name="phone">Номер телефона</string>
+    <string name="agree_publish">Подтверждение</string>
+    <string name="get_notifications">Получить уведомление</string>
+    <string name="send">Отправить</string>
+    <string name="info">Информация</string>
+    <string name="delete_photo">delete photo</string>
+    <string name="back">Назад</string>
+
+
+    <string-array name="category_array">
+        <item>Редкое растение</item>
+        <item>Редкое животное</item>
+        <item>Сообщение о новом растении</item>
+        <item>Другое</item>
+    </string-array>
 </resources>

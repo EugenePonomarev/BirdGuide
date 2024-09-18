@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/supportListFragment"
-        android:name="com.greencodemoscow.redbook.support.presentation.SupportListFragment"
+        android:name="com.greencodemoscow.redbook.support.presentation.screen.SupportListFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_support_list" />
     <fragment
