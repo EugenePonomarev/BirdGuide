@@ -29,7 +29,6 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
     private val binding by viewBinding(FragmentReportBinding::bind)
     private val viewModel: ReportViewModel by viewModels()
 
-
     private lateinit var photosAdapter: PhotosAdapter
     private val selectedPhotos = mutableListOf<Uri>()
 
@@ -39,16 +38,21 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
         val categories = resources.getStringArray(R.array.category_array)
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, categories)
         binding.autoCompleteCategory.setAdapter(adapter)
+        binding.autoCompleteCategory.threshold = 0
 
         // Обработка выбора категории
-        binding.autoCompleteCategory.setOnItemClickListener { parent, view, position, id ->
-            val selectedCategory = categories[position]
-            if (selectedCategory == "Другое" || selectedCategory == "Сообщение о новом растении") {
-                binding.layoutCustomCategory.visibility = View.VISIBLE
-            } else {
-                binding.layoutCustomCategory.visibility = View.GONE
-            }
+        binding.autoCompleteCategory.setOnClickListener {
+            binding.autoCompleteCategory.showDropDown()
         }
+//        binding.autoCompleteCategory.setOnItemClickListener { parent, view, position, id ->
+//            binding.autoCompleteCategory.showDropDown()
+//            val selectedCategory = categories[position]
+//            if (selectedCategory == "Другое" || selectedCategory == "Сообщение о новом растении") {
+//                binding.layoutCustomCategory.visibility = View.VISIBLE
+//            } else {
+//                binding.layoutCustomCategory.visibility = View.GONE
+//            }
+//        }
 
         // Настройка RecyclerView для фотографий
         photosAdapter = PhotosAdapter(selectedPhotos) { position ->

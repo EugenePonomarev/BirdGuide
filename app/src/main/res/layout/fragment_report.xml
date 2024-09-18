@@ -67,8 +67,14 @@
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none" />
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:inputType="none"
+                android:paddingStart="8dp"
+                tools:ignore="LabelFor,RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Дополнительная категория, если выбрано "Другое" или специфическая категория -->

@@ -56,10 +56,10 @@ class MainActivity : AppCompatActivity() {
                     if (state.isLoading) {
                         val pulseAnimation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.pulse)
                         binding.splashLayout.splashImage.startAnimation(pulseAnimation)
-                        binding.mainLayout.main.visibility = View.GONE
+                        binding.mainLayout.mainLayout.visibility = View.GONE
                         binding.splashLayout.splashLayout.visibility = View.VISIBLE
                     } else {
-                        binding.mainLayout.main.visibility = View.VISIBLE
+                        binding.mainLayout.mainLayout.visibility = View.VISIBLE
                         binding.splashLayout.splashLayout.visibility = View.GONE
                         initNavHost()
                     }
