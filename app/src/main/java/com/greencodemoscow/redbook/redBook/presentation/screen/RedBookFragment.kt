@@ -90,13 +90,13 @@ class RedBookFragment : Fragment(R.layout.fragment_red_book) {
     }
 
     private fun hideBottomNavigationView() {
-        (activity as? MainActivity)?.binding?.bottomNavigationView?.let { bottomNav ->
+        (activity as? MainActivity)?.binding?.mainLayout?.bottomNavigationView?.let { bottomNav ->
             bottomNav.animate().translationY(bottomNav.height.toFloat()).duration = 200
         }
     }
 
     private fun showBottomNavigationView() {
-        (activity as? MainActivity)?.binding?.bottomNavigationView?.let { bottomNav ->
+        (activity as? MainActivity)?.binding?.mainLayout?.bottomNavigationView?.let { bottomNav ->
             bottomNav.animate().translationY(0f).duration = 200
         }
     }

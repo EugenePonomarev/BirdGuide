@@ -9,7 +9,7 @@
         android:icon="@drawable/baseline_park_24"
         android:title="@string/red_book" />
     <item
-        android:id="@+id/favoritesFragment"
-        android:icon="@drawable/baseline_favorite_24"
-        android:title="@string/favorites" />
+        android:id="@+id/supportListFragment"
+        android:icon="@drawable/support_agent"
+        android:title="@string/support" />
 </menu>

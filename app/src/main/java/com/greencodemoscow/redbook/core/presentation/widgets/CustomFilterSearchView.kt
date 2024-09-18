@@ -93,8 +93,10 @@ class CustomFilterSearchView @JvmOverloads constructor(
     fun setParks(parks: List<String>) {
         if (parks.isEmpty()) {
             binding.textInputLayoutParks.visibility = View.GONE
+            binding.autoCompleteParks.visibility = View.GONE
         } else {
             binding.textInputLayoutParks.visibility = View.VISIBLE
+            binding.autoCompleteParks.visibility = View.VISIBLE
             val adapter = ArrayAdapter(context, R.layout.simple_list_item_1, parks)
             binding.autoCompleteParks.setAdapter(adapter)
             binding.autoCompleteParks.threshold = 0

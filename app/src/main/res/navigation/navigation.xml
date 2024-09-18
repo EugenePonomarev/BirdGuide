@@ -6,10 +6,10 @@
     app:startDestination="@id/redBookFragment">
 
     <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="com.greencodemoscow.redbook.favorites.FavoritesFragment"
+        android:id="@+id/supportListFragment"
+        android:name="com.greencodemoscow.redbook.support.presentation.SupportListFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_support_list" />
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.greencodemoscow.redbook.map.presentation.screen.MapFragment"

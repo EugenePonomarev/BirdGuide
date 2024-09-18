@@ -83,4 +83,16 @@ dependencies {
     api(libs.androidx.navigation.dynamic.features.fragment)
     // yandex map kit
     implementation(libs.yandex.maps.mobile)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.logging.interceptor)
+
+    // Room components
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation(libs.androidx.room.ktx)
 }

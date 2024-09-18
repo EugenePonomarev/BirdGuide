@@ -4,6 +4,7 @@
     <string name="parks">Парки</string>
     <string name="red_book">Красная книга</string>
     <string name="favorites">Избранное</string>
+    <string name="support">Обращения</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_here">Искать растения/животные</string>
     <string name="favorite_icon">favorite_icon</string>
@@ -14,4 +15,6 @@
     <string name="select_park">Выберите парк</string>
     <string name="details">Детали</string>
     <string name="to_list">К списку</string>
+    <string name="do_not_inquiries">Обращений Нет</string>
+    <string name="add_item">Добавить элемент\n</string>
 </resources>
