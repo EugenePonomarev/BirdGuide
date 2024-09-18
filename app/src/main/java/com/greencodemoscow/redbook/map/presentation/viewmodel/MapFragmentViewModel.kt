@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.greencodemoscow.redbook.app.domain.LocationTracker
 import com.greencodemoscow.redbook.app.domain.repositories.RedBookRepository
 import com.greencodemoscow.redbook.core.data.request.RedBookRequestItem
+import com.greencodemoscow.redbook.core.data.request.generateTestData
 import com.greencodemoscow.redbook.map.presentation.model.MapFragmentState
 import com.yandex.mapkit.geometry.Point
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -45,57 +46,74 @@ class MapFragmentViewModel @Inject constructor(
 
     private fun getData() {
         viewModelScope.launch {
-            redBookItems
-                .onStart {
-                    _state.value = _state.value.copy(isError = false, isLoading = true)
-                }
-                .onCompletion { }
-                .catch {
-                    _state.value = _state.value.copy(isError = true, isLoading = false)
-                }
-                .collect { items ->
-                    // Filter lists
-                    // Filter and map items into two lists of Points
-                    val animalPoints = items.filter {
-                        it.category.name == ANIMAL_TAG && it.location != null
-                    }.mapNotNull { item ->
-                        item.location?.let { location ->
-                            try {
-                                Points(
-                                    item = item,
-                                    points = Point(location.latitude.toDouble(), location.longitude.toDouble())
-                                )
-                            } catch (e: NumberFormatException) {
-                                null // skip invalid locations
-                            }
-                        }
-                    }
-
-                    val plantPoints = items.filter {
-                        it.category.name == PLANT_TAG && it.location != null
-                    }.mapNotNull { item ->
-                        item.location?.let { location ->
-                            try {
-                                Points(
-                                    item = item,
-                                    points = Point(location.latitude.toDouble(), location.longitude.toDouble())
-                                )
-                            } catch (e: NumberFormatException) {
-                                null // skip invalid locations
-                            }
-                        }
-                    }
-
-                    // Update state with filtered lists
-                    _state.value = _state.value.copy(
-                        isError = false,
-                        isLoading = false,
-                        redBookItems = items,
-                        animalList = animalPoints,
-                        plantList = plantPoints
-                    )
-                }
+            generateData(generateTestData())
         }
+//        viewModelScope.launch {
+//            redBookItems
+//                .onStart {
+//                    _state.value = _state.value.copy(isError = false, isLoading = true)
+//                }
+//                .onCompletion { }
+//                .catch {
+//                    _state.value = _state.value.copy(isError = true, isLoading = false)
+//                }
+//                .collect { items ->
+//                    generateData(items)
+//                }
+//        }
+    }
+
+    private fun generateData(items: List<RedBookRequestItem>) {
+        // Логируем количество полученных элементов
+        Log.e("TAG_DATA", "Total items received: ${items.size}")
+
+        val animalPoints = items.filter {
+            Log.e("TAG_DATA", "Item category: ${it.category.name}, location: ${it.location}")
+            it.category.name == ANIMAL_TAG && it.location != null
+        }.mapNotNull { item ->
+            item.location?.let { location ->
+                try {
+                    Points(
+                        item = item,
+                        points = Point(location.latitude.toDouble(), location.longitude.toDouble())
+                    )
+                } catch (e: NumberFormatException) {
+                    Log.e("TAG_DATA", "Invalid location format: ${location.latitude}, ${location.longitude}")
+                    null // skip invalid locations
+                }
+            }
+        }
+
+        Log.e("TAG_DATA", "Filtered animal points: ${animalPoints.size}")
+
+        val plantPoints = items.filter {
+            it.category.name == PLANT_TAG && it.location != null
+        }.mapNotNull { item ->
+            item.location?.let { location ->
+                try {
+                    Points(
+                        item = item,
+                        points = Point(location.latitude.toDouble(), location.longitude.toDouble())
+                    )
+                } catch (e: NumberFormatException) {
+                    Log.e("TAG_DATA", "Invalid location format: ${location.latitude}, ${location.longitude}")
+                    null // skip invalid locations
+                }
+            }
+        }
+
+        Log.e("TAG_DATA", "Filtered plant points: ${plantPoints.size}")
+
+        // Обновляем состояние с логированием
+        _state.value = _state.value.copy(
+            isError = false,
+            isLoading = false,
+            redBookItems = items,
+            animalList = animalPoints,
+            plantList = plantPoints
+        )
+
+        Log.e("TAG_DATA", "State updated with ${animalPoints.size} animals and ${plantPoints.size} plants")
     }
 
     fun locationTracker() {

@@ -6,11 +6,6 @@
     app:startDestination="@id/redBookFragment">
 
     <fragment
-        android:id="@+id/supportListFragment"
-        android:name="com.greencodemoscow.redbook.support.presentation.screen.SupportListFragment"
-        android:label="fragment_favorites"
-        tools:layout="@layout/fragment_support_list" />
-    <fragment
         android:id="@+id/mapFragment"
         android:name="com.greencodemoscow.redbook.map.presentation.screen.MapFragment"
         android:label="fragment_map"
@@ -37,4 +32,24 @@
             android:name="redBookItem"
             app:argType="com.greencodemoscow.redbook.redBook.data.model.RedBookItem" />
     </fragment>
+
+    <fragment
+        android:id="@+id/supportListFragment"
+        android:name="com.greencodemoscow.redbook.support.presentation.screen.SupportListFragment"
+        android:label="Support List"
+        tools:layout="@layout/fragment_support_list">
+        <action
+            android:id="@+id/action_supportListFragment_to_reportFragment"
+            app:destination="@id/reportFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.greencodemoscow.redbook.support.presentation.screen.ReportFragment"
+        android:label="Report"
+        tools:layout="@layout/fragment_report" />
 </navigation>

@@ -19,7 +19,6 @@ import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Circle
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
-import com.yandex.mapkit.map.IconStyle
 import com.yandex.mapkit.map.MapObjectCollection
 import com.yandex.runtime.image.ImageProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,19 +65,23 @@ class MapFragment : Fragment(R.layout.fragment_map) {
     }
 
     private fun initMapKit() {
+        // Перемещаем камеру на среднюю точку всех координат с увеличенным масштабом
         binding.mapView.mapWindow.map.move(
             CameraPosition(
-                Point(55.751157, 37.628505),
-                10f,
+                Point(55.711851, 37.507693), // Средняя точка для центра карты
+                14f, // Увеличьте масштаб для лучшей видимости точек
                 0f,
                 0f
             )
         )
 
+        // Включаем слой пользовательского местоположения
         val mapKit = MapKitFactory.getInstance()
-
         val locationMapKit = mapKit.createUserLocationLayer(binding.mapView.mapWindow)
         locationMapKit.isVisible = true
+
+        // Принудительно обновляем карту
+        binding.mapView.invalidate()
     }
 
     private fun stateSubscribe() {
@@ -100,14 +103,14 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         mapObjects: MapObjectCollection
     ) {
         val imageProvider = ImageProvider.fromResource(requireContext(), R.drawable.animal)
-        val pinsCollection = mapObjects.addCollection()
+        val pinsCollection = binding.mapView.mapWindow.map.mapObjects.addCollection()
         points.forEach { point ->
             // Add circle
-            val circle = Circle(point, 1f)
+            val circle = Circle(point, 50.0f) // Радиус 50 метров
             mapObjects.addCircle(circle).apply {
-                strokeColor = Color.argb(100, 255, 0, 0) // Red color with transparency
-                strokeWidth = 1.5f // Border width
-                fillColor = Color.argb(100, 255, 200, 200) // Fill color with transparency
+                strokeColor = Color.argb(150, 255, 0, 0) // Красная граница
+                strokeWidth = 2f
+                fillColor = Color.argb(100, 255, 100, 100) // Полупрозрачная заливка
             }
 
             // Add icon
@@ -116,6 +119,8 @@ class MapFragment : Fragment(R.layout.fragment_map) {
                 setIcon(imageProvider)
             }
         }
+
+        binding.mapView.invalidate() // Обновляем карту
     }
 
     private fun addPlantIcons(
@@ -123,13 +128,15 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         mapObjects: MapObjectCollection
     ) {
         val imageProvider = ImageProvider.fromResource(requireContext(), R.drawable.plant)
-        val pinsCollection = mapObjects.addCollection()
+        val pinsCollection = binding.mapView.mapWindow.map.mapObjects.addCollection()
         points.forEach { point ->
             pinsCollection.addPlacemark().apply {
                 geometry = point
                 setIcon(imageProvider)
             }
         }
+
+        binding.mapView.invalidate()
     }
 
     override fun onStart() {

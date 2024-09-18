@@ -6,6 +6,7 @@ import com.greencodemoscow.redbook.redBook.data.api.RedBookApi
 import com.greencodemoscow.redbook.app.domain.repositories.RedBookRepository
 import com.greencodemoscow.redbook.core.data.db.RedBookDao
 import com.greencodemoscow.redbook.core.data.request.RedBookRequestItem
+import com.greencodemoscow.redbook.core.data.request.generateTestData
 import com.greencodemoscow.redbook.map.data.model.PointData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -28,6 +29,8 @@ class RedBookRepositoryImpl @Inject constructor(
             if (response.isNotEmpty()) {
                 // Insert into the database if response is not empty
                 redBookDao.insertAll(response)
+            } else {
+                redBookDao.insertAll(generateTestData())
             }
 
             // Emit the flow from the database
