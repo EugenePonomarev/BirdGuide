@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.greencodemoscow.redbook.BuildConfig.MAPKIT_API_KEY
 import com.greencodemoscow.redbook.R
@@ -33,15 +34,12 @@ class RedBookItemFragment : Fragment(R.layout.fragment_red_book_item) {
 
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        MapKitFactory.setApiKey(MAPKIT_API_KEY)
-        MapKitFactory.initialize(this.context)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.imageBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
         // Получаем аргументы
         val args: RedBookItemFragmentArgs by navArgs()
         val redBookItem = args.redBookItem
@@ -52,22 +50,6 @@ class RedBookItemFragment : Fragment(R.layout.fragment_red_book_item) {
         // Загрузите изображение, описание или любые другие данные
 
         checkPermission()
-
-        binding.mapView.mapWindow.map.move(
-            CameraPosition(
-                Point(55.753814, 37.614435),
-                13f,
-                150f,
-                30f
-            ),
-            Animation(Animation.Type.SMOOTH, 15f),
-            null
-        )
-
-        val mapKit = MapKitFactory.getInstance()
-
-        val locationMapKit = mapKit.createUserLocationLayer(binding.mapView.mapWindow)
-        locationMapKit.isVisible = true
     }
 
     private fun checkPermission() {
@@ -83,17 +65,5 @@ class RedBookItemFragment : Fragment(R.layout.fragment_red_book_item) {
                 android.Manifest.permission.ACCESS_COARSE_LOCATION,
             )
         )
-    }
-
-    override fun onStart() {
-        super.onStart()
-        MapKitFactory.getInstance().onStart()
-        binding.mapView.onStart()
-    }
-
-    override fun onStop() {
-        binding.mapView.onStop()
-        MapKitFactory.getInstance().onStop()
-        super.onStop()
     }
 }

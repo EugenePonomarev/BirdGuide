@@ -2,6 +2,7 @@ package com.greencodemoscow.redbook.map.presentation.screen
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
@@ -68,7 +69,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         // Перемещаем камеру на среднюю точку всех координат с увеличенным масштабом
         binding.mapView.mapWindow.map.move(
             CameraPosition(
-                Point(55.711851, 37.507693), // Средняя точка для центра карты
+                Point(55.815018, 37.436728), // Средняя точка для центра карты
                 14f, // Увеличьте масштаб для лучшей видимости точек
                 0f,
                 0f
@@ -105,8 +106,9 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         val imageProvider = ImageProvider.fromResource(requireContext(), R.drawable.animal)
         val pinsCollection = binding.mapView.mapWindow.map.mapObjects.addCollection()
         points.forEach { point ->
+            Log.e("TAG_POINT", "animal point: ${point.latitude} ${point.longitude}", )
             // Add circle
-            val circle = Circle(point, 50.0f) // Радиус 50 метров
+            val circle = Circle(point, 20.0f) // Радиус 5 метров
             mapObjects.addCircle(circle).apply {
                 strokeColor = Color.argb(150, 255, 0, 0) // Красная граница
                 strokeWidth = 2f
@@ -130,6 +132,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         val imageProvider = ImageProvider.fromResource(requireContext(), R.drawable.plant)
         val pinsCollection = binding.mapView.mapWindow.map.mapObjects.addCollection()
         points.forEach { point ->
+            Log.e("TAG_POINT", "plant point: ${point.latitude} ${point.longitude}", )
             pinsCollection.addPlacemark().apply {
                 geometry = point
                 setIcon(imageProvider)

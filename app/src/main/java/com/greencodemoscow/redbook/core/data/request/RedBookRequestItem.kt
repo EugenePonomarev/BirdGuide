@@ -18,16 +18,29 @@ data class RedBookRequestItem(
     val name: String
 )
 
-// Генерация случайных координат для Москворецкого парка
-fun getRandomLocation(): Location {
-    val latitude = 55.707 + Random.nextDouble(0.001, 0.01)
-    val longitude = 37.501 + Random.nextDouble(0.001, 0.01)
-    return Location(
-        id = UUID.randomUUID().toString(),
-        latitude = latitude.toString(),
-        longitude = longitude.toString()
-    )
-}
+
+val locations = mutableListOf(
+    Location(id = UUID.randomUUID().toString(), "55.815018", "37.436728"),
+    Location(id = UUID.randomUUID().toString(), "55.809023", "37.420462"),
+    Location(id = UUID.randomUUID().toString(), "55.812611", "37.413236"),
+    Location(id = UUID.randomUUID().toString(), "55.807283", "37.427879"),
+    Location(id = UUID.randomUUID().toString(), "55.806574", "37.439846"),
+    Location(id = UUID.randomUUID().toString(), "55.804167", "37.442217"),
+    Location(id = UUID.randomUUID().toString(), "55.803157", "37.419200"),
+    Location(id = UUID.randomUUID().toString(), "55.812138", "37.413962"),
+    Location(id = UUID.randomUUID().toString(), "55.813148", "37.413427"),
+    Location(id = UUID.randomUUID().toString(), "55.816772", "37.406996"),
+    Location(id = UUID.randomUUID().toString(), "55.822154", "37.406095"),
+    Location(id = UUID.randomUUID().toString(), "55.815634", "37.420113"),
+    Location(id = UUID.randomUUID().toString(), "55.795867", "37.416559"),
+    Location(id = UUID.randomUUID().toString(), "55.791352", "37.428214"),
+    Location(id = UUID.randomUUID().toString(), "55.789077", "37.424963"),
+    Location(id = UUID.randomUUID().toString(), "55.793913", "37.438959"),
+    Location(id = UUID.randomUUID().toString(), "55.803778", "37.442232"),
+    Location(id = UUID.randomUUID().toString(), "55.803440", "37.430341"),
+    Location(id = UUID.randomUUID().toString(), "55.810313", "37.437047"),
+    Location(id = UUID.randomUUID().toString(), "55.813047", "37.444549")
+)
 
 // Список редких животных
 val animals = listOf(
@@ -43,7 +56,15 @@ val plants = listOf(
     "Калужница болотная", "Очиток едкий", "Багульник болотный", "Ковыль перистый"
 )
 
-// Генерация данных для животных
+fun getUniqueLocation(): Location {
+    if (locations.isNotEmpty()) {
+        return locations.removeAt(0) // Возвращаем и удаляем локацию из списка
+    } else {
+        throw IllegalStateException("Локации закончились") // Обрабатываем случай нехватки локаций
+    }
+}
+
+// Генерация данных для животных с использованием уникальных локаций
 fun generateAnimalData(): List<RedBookRequestItem> {
     return animals.mapIndexed { index, animal ->
         RedBookRequestItem(
@@ -52,13 +73,13 @@ fun generateAnimalData(): List<RedBookRequestItem> {
             description = "Редкое животное: $animal",
             id = UUID.randomUUID().toString(),
             imageUrl = "https://example.com/animal$index.jpg",
-            location = getRandomLocation(),
+            location = getUniqueLocation(),
             name = animal
         )
     }
 }
 
-// Генерация данных для растений
+// Генерация данных для растений с использованием уникальных локаций
 fun generatePlantData(): List<RedBookRequestItem> {
     return plants.mapIndexed { index, plant ->
         RedBookRequestItem(
@@ -67,7 +88,7 @@ fun generatePlantData(): List<RedBookRequestItem> {
             description = "Редкое растение: $plant",
             id = UUID.randomUUID().toString(),
             imageUrl = "https://example.com/plant$index.jpg",
-            location = getRandomLocation(),
+            location = getUniqueLocation(),
             name = plant
         )
     }

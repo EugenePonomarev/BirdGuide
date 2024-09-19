@@ -45,22 +45,22 @@ class MapFragmentViewModel @Inject constructor(
     }
 
     private fun getData() {
-//        viewModelScope.launch {
-//            generateData(generateTestData())
-//        }
         viewModelScope.launch {
-            redBookItems
-                .onStart {
-                    _state.value = _state.value.copy(isError = false, isLoading = true)
-                }
-                .onCompletion { }
-                .catch {
-                    _state.value = _state.value.copy(isError = true, isLoading = false)
-                }
-                .collect { items ->
-                    generateData(items)
-                }
+            generateData(generateTestData())
         }
+//        viewModelScope.launch {
+//            redBookItems
+//                .onStart {
+//                    _state.value = _state.value.copy(isError = false, isLoading = true)
+//                }
+//                .onCompletion { }
+//                .catch {
+//                    _state.value = _state.value.copy(isError = true, isLoading = false)
+//                }
+//                .collect { items ->
+//                    generateData(items)
+//                }
+//        }
     }
 
     private fun generateData(items: List<RedBookRequestItem>) {
