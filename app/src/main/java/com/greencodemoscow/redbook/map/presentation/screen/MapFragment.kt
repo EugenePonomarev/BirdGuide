@@ -108,7 +108,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         points.forEach { point ->
             Log.e("TAG_POINT", "animal point: ${point.latitude} ${point.longitude}", )
             // Add circle
-            val circle = Circle(point, 20.0f) // Радиус 5 метров
+            val circle = Circle(point, 30.0f) // Радиус 5 метров
             mapObjects.addCircle(circle).apply {
                 strokeColor = Color.argb(150, 255, 0, 0) // Красная граница
                 strokeWidth = 2f
